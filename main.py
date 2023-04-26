@@ -1,4 +1,5 @@
 import random as r
+import turtle as t
 
 def drawSquare(size):
     
@@ -21,10 +22,18 @@ def drawRect(width, height, color):
         t.right(90)
     t.end_fill()
 
-def drawTriangle(size):
+def drawTriangle(size, filled, color):
+    if filled:
+        previousColor = t.pencolor()
+        t.color(color)
+        t.begin_fill()
     for i in range(3):
         t.forward(size)
         t.right(120)
+    if filled:
+        t.end_fill()
+        t.color(previousColor)
+        del(previousColor)
 
 def drawCircle(size):
     t.circle(size)
