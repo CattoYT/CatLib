@@ -1,9 +1,11 @@
 import random as r
 import turtle as t
+import math as m
 
 class catLib:
-    def __init__(self, turtle):
+    def __init__(self, turtle, math):
         self.t = turtle
+        self.m = math
 
     def drawSquare(self, size):
         for _ in range(4):
@@ -101,3 +103,31 @@ class catLib:
             self.t.setheading(0)
             self.t.forward(100)
             self.draw5PointStar("yellow")
+
+    
+    def drawRightAngledTriangle(self, height, opposite, angle, right, color):
+        self.t.begin_fill()
+        if color is None:
+            self.t.color("black")
+        else:
+            self.t.color(color)
+
+        self.t.forward(opposite)
+        self.currentAngle = self.t.heading()
+
+        if self.right:
+            self.desiredAngle = self.currentAngle - 180 - angle
+        elif right == False:
+            self.desiredAngle = self.currentAngle - 180 + angle
+        else:
+            raise Exception("INVALID ARGUEMENT")
+
+        self.t.setheading(self.desiredAngle)
+
+        self.hypotenuse = m.sqrt(height**2 + opposite**2)
+        
+        self.t.forward(self.hypotenuse)
+        self.t.setheading(270)
+        self.t.forward(height)
+        
+        self.t.end_fill()
