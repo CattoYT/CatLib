@@ -112,22 +112,38 @@ class catLib:
         else:
             self.t.color(color)
 
+        if right:
+            
+            self.turnLeft = False
+        elif right == False:
+            
+            self.turnLeft = True
+            
+        else:
+            raise Exception("INVALID ARGUEMENT")
+            
+        self.t.forward(height)
+        if self.turnLeft:
+            self.t.left(90)
         self.t.forward(opposite)
+        
         self.currentAngle = self.t.heading()
-
-        if self.right:
+        
+        if right:
             self.desiredAngle = self.currentAngle - 180 - angle
         elif right == False:
             self.desiredAngle = self.currentAngle - 180 + angle
         else:
             raise Exception("INVALID ARGUEMENT")
+        
 
         self.t.setheading(self.desiredAngle)
 
         self.hypotenuse = m.sqrt(height**2 + opposite**2)
-        
+        print(f"hypotenuse = {self.hypotenuse}")
         self.t.forward(self.hypotenuse)
-        self.t.setheading(270)
-        self.t.forward(height)
+        self.t.setheading(0)
+        
+        
         
         self.t.end_fill()
